@@ -271,17 +271,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Function to send form data to Google Sheets
+async function sendToSheets(formData) {
+  await fetch("https://script.google.com/macros/s/AKfycbywDI2TwG_VMje1R109LkhyMMhOArxcsDr4th6NX97cbQiikYm3amThhm4vv_QKkzen/exec", {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+}
+
 // Form submission
-document.getElementById('demo-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData);
+document.getElementById('demo-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    // Here you would typically send the data to your server
-    alert(`Demo request submitted!\nName: ${data.name} ${data.surname}\nEmail: ${data.email}\nClass Level: ${data['class-level']}\nRole: ${data.role}`);
+  const data = {
+    name: document.getElementById('name').value,
+    surname: document.getElementById('surname').value,
+    email: document.getElementById('email').value,
+    classLevel: document.getElementById('class-level').value,
+    role: document.getElementById('role').value
+  };
 
+  try {
+    await sendToSheets(data);
+    alert("Отправлено!");
     // Reset form
-    this.reset();
+    document.getElementById('demo-form').reset();
+  } catch (error) {
+    alert("Ошибка при отправке данных. Попробуйте еще раз.");
+    console.error("Error sending data:", error);
+  }
 });
 
 // Progressive animations for sections and cards on scroll
