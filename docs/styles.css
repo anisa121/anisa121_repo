@@ -68,39 +68,41 @@ nav h1 {
 }
 
 .cta-button {
-    background-color: #4CAF50;
+    background: linear-gradient(135deg, #66BB6A 0%, #FFF59D 100%);
     color: #fff;
     padding: 0.5rem 1rem;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 20px;
     transition: all 0.3s ease;
     font-weight: 400;
     font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(102, 187, 106, 0.2);
 }
 
 .cta-button:hover {
-    background-color: #45a049;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    background: linear-gradient(135deg, #81C784 0%, #FFF176 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 187, 106, 0.3);
 }
 
 .cta-button.primary {
-    background-color: #4CAF50;
+    background: linear-gradient(135deg, #66BB6A 0%, #FFF59D 100%);
 }
 
 .cta-button.primary:hover {
-    background-color: #45a049;
+    background: linear-gradient(135deg, #81C784 0%, #FFF176 100%);
 }
 
 .cta-button.secondary {
-    background-color: transparent;
-    color: #4CAF50;
-    border: 1px solid #4CAF50;
+    background: linear-gradient(135deg, rgba(255, 245, 157, 0.1) 0%, rgba(102, 187, 106, 0.1) 100%);
+    color: #66BB6A;
+    border: 2px solid #66BB6A;
 }
 
 .cta-button.secondary:hover {
-    background-color: #4CAF50;
+    background: linear-gradient(135deg, #66BB6A 0%, #FFF59D 100%);
     color: #fff;
+    border-color: #66BB6A;
 }
 
 .lang-button {
@@ -125,12 +127,13 @@ nav h1 {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #e8f5e8 0%, #fff9c4 100%);
+    background: linear-gradient(135deg, #E8F5E8 0%, #FFFDE7 100%);
     color: #2c3e50;
     padding: 140px 0 100px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-radius: 0 0 50px 50px;
 }
 
 .hero::before {
@@ -237,11 +240,12 @@ nav h1 {
 
 /* CTA Section */
 .cta-section {
-    background: linear-gradient(135deg, #e8f5e8 0%, #fff9c4 100%);
+    background: linear-gradient(135deg, #E8F5E8 0%, #FFFDE7 100%);
     color: #2c3e50;
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-radius: 50px 50px 0 0;
 }
 
 .cta-section::before {
@@ -311,18 +315,18 @@ footer p {
 }
 
 .solution-card, .benefit-item, .safeguard-item, .challenge-item {
-    background: #ffffff;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFFDE7 100%);
     padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+    box-shadow: 0 6px 24px rgba(102, 187, 106, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #4CAF50;
+    border-left: 6px solid #66BB6A;
 }
 
 .solution-card:hover, .benefit-item:hover, .safeguard-item:hover, .challenge-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-    border-left-color: #FFC107;
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(102, 187, 106, 0.2);
+    border-left-color: #FFF176;
 }
 
 .solution-card h4, .benefit-item h4, .safeguard-item h4, .challenge-item h4 {
@@ -432,19 +436,21 @@ footer p {
 #demo-form button {
     align-self: flex-start;
     margin-top: 0.5rem;
-    background: linear-gradient(135deg, #4CAF50 0%, #FFC107 100%);
+    background: linear-gradient(135deg, #66BB6A 0%, #FFF176 100%);
     border: none;
     color: #fff;
     padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 16px;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 187, 106, 0.2);
 }
 
 #demo-form button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(102, 187, 106, 0.3);
 }
 
 /* Responsive Design */

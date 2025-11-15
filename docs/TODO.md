@@ -1,17 +1,7 @@
-# TODO List for Peer Learning Landing Page
+# TODO List for UI/UX Redesign
 
-- [x] Create project directory 'peer-learning-landing-page'
-- [x] Create index.html with hero section, hypothesis, mechanism, beneficiaries, safeguards, uncertainties, and footer
-- [x] Create styles.css for responsive, professional styling
-- [x] Create script.js for basic interactivity (smooth scrolling)
-- [x] Verify the page by opening in browser
-- [x] Update index.html to include Pathway 2 section, combined benefits, and demo sign-up form
-- [x] Revise styles.css for Apple-inspired modern UI/UX
-- [x] Update script.js for modal functionality and enhanced animations
-- [x] Test updated page in browser
-- [x] Change project name to "OUR FUTURE - OUR KIDS"
-- [x] Update demo section: Add direct form fields (name, surname, email, class level text, who applies dropdown), remove modal, remove iOS download button
-- [x] Add French language switch button in top right
-- [x] Make UI more modern with colorful/dark tones
-- [x] Update script for language switching and form submission
-- [x] Test final updates
+- [x] Change header h1 in index.html from "OUR FUTURE - OUR KIDS" to "Educational Team"
+- [x] Update styles.css to use softer green, white, and yellow tones for a more pleasurable design
+- [x] Enhance design elements: increase border-radius, add soft shadows, subtle animations, warmer yellows in backgrounds
+- [x] Verify page loads correctly and colors appear pleasurable (server running on port 8000)
+- [x] Test responsiveness on different screen sizes (CSS media queries in place for mobile/tablet)
