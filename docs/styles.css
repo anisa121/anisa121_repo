@@ -59,12 +59,21 @@ nav h1 {
     font-size: 0.9rem;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .lang-button:hover {
     background-color: rgba(255, 255, 255, 0.9);
     border-color: rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
+}
+
+.lang-button:active {
+    transform: scale(0.95);
 }
 
 .cta-button {
