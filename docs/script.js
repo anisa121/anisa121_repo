@@ -273,7 +273,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Функция для отправки данных на Apps Script
 async function sendToSheets(formData) {
-  const response = await fetch("https://script.google.com/macros/s/AKfycbywDI2TwG_VMje1R109LkhyMMhOArxcsDr4th6NX97cbQiikYm3amThhm4vv_QKkzen/exec", {
+  const response = await fetch("https://script.google.com/macros/s/AKfycbwNWJPFksBIRwuiMorezK8pPG7KaLNZLxAR6YqMfRj-cpSesLXBFT1CW26WH5wjIgVr/exec", {
     method: "POST",
     body: JSON.stringify(formData),
     headers: {
