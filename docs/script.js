@@ -284,17 +284,19 @@ document.getElementById('demo-form').addEventListener('submit', function(e) {
     this.reset();
 });
 
-// Simple animation for sections on scroll
+// Progressive animations for sections and cards on scroll
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, index * 100); // Staggered animation
         }
     });
 }, observerOptions);
@@ -304,4 +306,23 @@ document.querySelectorAll('.section').forEach(section => {
     section.style.transform = 'translateY(20px)';
     section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(section);
+});
+
+// Animate grid items with stagger
+const gridObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, index * 150);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.solution-card, .benefit-item, .safeguard-item, .challenge-item').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    gridObserver.observe(card);
 });
