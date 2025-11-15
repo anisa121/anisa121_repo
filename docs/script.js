@@ -189,131 +189,223 @@ const translations = {
 // Current language
 let currentLang = localStorage.getItem('language') || 'fr';
 
+// Ensure currentLang is valid
+if (currentLang !== 'fr' && currentLang !== 'en') {
+  currentLang = 'fr';
+  localStorage.setItem('language', currentLang);
+}
+
 // Function to update page content
 function updateContent(lang) {
   const t = translations[lang];
 
-  document.title = t.title;
-  document.documentElement.lang = lang;
+  if (!t) {
+    console.error('Translation not found for language:', lang);
+    return;
+  }
 
-  // Navigation
-  document.querySelector('nav h1').textContent = t.navTitle;
+  try {
+    document.title = t.title;
+    document.documentElement.lang = lang;
 
-  // Hero section
-  document.querySelector('#hero h1').textContent = t.heroTitle;
-  document.querySelector('#hero h2').textContent = t.heroSubtitle;
-  document.querySelector('#hero p').textContent = t.heroDesc;
-  document.querySelector('#hero a').textContent = t.heroButton;
+    // Navigation
+    const navTitle = document.querySelector('nav h1');
+    if (navTitle) navTitle.textContent = t.navTitle;
 
-  // Solutions section
-  document.querySelector('#solutions h3').textContent = t.solutionsTitle;
-  const pathway1 = document.querySelector('#solutions .solution-card:nth-child(1)');
-  pathway1.querySelector('h4').textContent = t.pathway1Title;
-  pathway1.querySelector('p strong').textContent = t.pathway1Hypothesis;
-  pathway1.querySelector('p:not(.solution-card p strong)').textContent = t.pathway1Desc;
-  const pathway1List = pathway1.querySelectorAll('li');
-  t.pathway1List.forEach((item, index) => {
-    pathway1List[index].textContent = item;
-  });
+    // Hero section
+    const heroTitle = document.querySelector('#hero h1');
+    if (heroTitle) heroTitle.textContent = t.heroTitle;
+    const heroSubtitle = document.querySelector('#hero h2');
+    if (heroSubtitle) heroSubtitle.textContent = t.heroSubtitle;
+    const heroDesc = document.querySelector('#hero p');
+    if (heroDesc) heroDesc.textContent = t.heroDesc;
+    const heroButton = document.querySelector('#hero a');
+    if (heroButton) heroButton.textContent = t.heroButton;
 
-  const pathway2 = document.querySelector('#solutions .solution-card:nth-child(2)');
-  pathway2.querySelector('h4').textContent = t.pathway2Title;
-  pathway2.querySelector('p strong').textContent = t.pathway2Hypothesis;
-  pathway2.querySelector('p:not(.solution-card p strong)').textContent = t.pathway2Desc;
-  const pathway2List = pathway2.querySelectorAll('li');
-  t.pathway2List.forEach((item, index) => {
-    pathway2List[index].textContent = item;
-  });
+    // Solutions section
+    const solutionsTitle = document.querySelector('#solutions h3');
+    if (solutionsTitle) solutionsTitle.textContent = t.solutionsTitle;
+    const pathway1 = document.querySelector('#solutions .solution-card:nth-child(1)');
+    if (pathway1) {
+      const p1Title = pathway1.querySelector('h4');
+      if (p1Title) p1Title.textContent = t.pathway1Title;
+      const p1Hypothesis = pathway1.querySelector('p strong');
+      if (p1Hypothesis) p1Hypothesis.textContent = t.pathway1Hypothesis;
+      const p1Desc = pathway1.querySelector('p:not(.solution-card p strong)');
+      if (p1Desc) p1Desc.textContent = t.pathway1Desc;
+      const pathway1List = pathway1.querySelectorAll('li');
+      t.pathway1List.forEach((item, index) => {
+        if (pathway1List[index]) pathway1List[index].textContent = item;
+      });
+    }
 
-  // Benefits section
-  document.querySelector('#benefits h3').textContent = t.benefitsTitle;
-  const students = document.querySelector('#benefits .benefit-item:nth-child(1)');
-  students.querySelector('h4').textContent = t.studentsTitle;
-  const studentsList = students.querySelectorAll('li');
-  t.studentsList.forEach((item, index) => {
-    studentsList[index].textContent = item;
-  });
+    const pathway2 = document.querySelector('#solutions .solution-card:nth-child(2)');
+    if (pathway2) {
+      const p2Title = pathway2.querySelector('h4');
+      if (p2Title) p2Title.textContent = t.pathway2Title;
+      const p2Hypothesis = pathway2.querySelector('p strong');
+      if (p2Hypothesis) p2Hypothesis.textContent = t.pathway2Hypothesis;
+      const p2Desc = pathway2.querySelector('p:not(.solution-card p strong)');
+      if (p2Desc) p2Desc.textContent = t.pathway2Desc;
+      const pathway2List = pathway2.querySelectorAll('li');
+      t.pathway2List.forEach((item, index) => {
+        if (pathway2List[index]) pathway2List[index].textContent = item;
+      });
+    }
 
-  const teachers = document.querySelector('#benefits .benefit-item:nth-child(2)');
-  teachers.querySelector('h4').textContent = t.teachersTitle;
-  const teachersList = teachers.querySelectorAll('li');
-  t.teachersList.forEach((item, index) => {
-    teachersList[index].textContent = item;
-  });
+    // Benefits section
+    const benefitsTitle = document.querySelector('#benefits h3');
+    if (benefitsTitle) benefitsTitle.textContent = t.benefitsTitle;
+    const students = document.querySelector('#benefits .benefit-item:nth-child(1)');
+    if (students) {
+      const studentsTitle = students.querySelector('h4');
+      if (studentsTitle) studentsTitle.textContent = t.studentsTitle;
+      const studentsList = students.querySelectorAll('li');
+      t.studentsList.forEach((item, index) => {
+        if (studentsList[index]) studentsList[index].textContent = item;
+      });
+    }
 
-  const parents = document.querySelector('#benefits .benefit-item:nth-child(3)');
-  parents.querySelector('h4').textContent = t.parentsTitle;
-  const parentsList = parents.querySelectorAll('li');
-  t.parentsList.forEach((item, index) => {
-    parentsList[index].textContent = item;
-  });
+    const teachers = document.querySelector('#benefits .benefit-item:nth-child(2)');
+    if (teachers) {
+      const teachersTitle = teachers.querySelector('h4');
+      if (teachersTitle) teachersTitle.textContent = t.teachersTitle;
+      const teachersList = teachers.querySelectorAll('li');
+      t.teachersList.forEach((item, index) => {
+        if (teachersList[index]) teachersList[index].textContent = item;
+      });
+    }
 
-  // Safeguards section
-  document.querySelector('#safeguards h3').textContent = t.safeguardsTitle;
-  const classroom = document.querySelector('#safeguards .safeguard-item:nth-child(1)');
-  classroom.querySelector('h4').textContent = t.classroomTitle;
-  const classroomList = classroom.querySelectorAll('li');
-  t.classroomList.forEach((item, index) => {
-    classroomList[index].textContent = item;
-  });
+    const parents = document.querySelector('#benefits .benefit-item:nth-child(3)');
+    if (parents) {
+      const parentsTitle = parents.querySelector('h4');
+      if (parentsTitle) parentsTitle.textContent = t.parentsTitle;
+      const parentsList = parents.querySelectorAll('li');
+      t.parentsList.forEach((item, index) => {
+        if (parentsList[index]) parentsList[index].textContent = item;
+      });
+    }
 
-  const privacy = document.querySelector('#safeguards .safeguard-item:nth-child(2)');
-  privacy.querySelector('h4').textContent = t.privacyTitle;
-  const privacyList = privacy.querySelectorAll('li');
-  t.privacyList.forEach((item, index) => {
-    privacyList[index].textContent = item;
-  });
+    // Safeguards section
+    const safeguardsTitle = document.querySelector('#safeguards h3');
+    if (safeguardsTitle) safeguardsTitle.textContent = t.safeguardsTitle;
+    const classroom = document.querySelector('#safeguards .safeguard-item:nth-child(1)');
+    if (classroom) {
+      const classroomTitle = classroom.querySelector('h4');
+      if (classroomTitle) classroomTitle.textContent = t.classroomTitle;
+      const classroomList = classroom.querySelectorAll('li');
+      t.classroomList.forEach((item, index) => {
+        if (classroomList[index]) classroomList[index].textContent = item;
+      });
+    }
 
-  // Challenges section
-  document.querySelector('#uncertainties h3').textContent = t.challengesTitle;
-  const engagement = document.querySelector('#uncertainties .challenge-item:nth-child(1)');
-  engagement.querySelector('h4').textContent = t.engagementTitle;
-  engagement.querySelector('p').textContent = t.engagementDesc;
-  engagement.querySelector('p strong').textContent = t.engagementApproach;
-  engagement.querySelector('p:last-child').textContent = t.engagementSolution;
+    const privacy = document.querySelector('#safeguards .safeguard-item:nth-child(2)');
+    if (privacy) {
+      const privacyTitle = privacy.querySelector('h4');
+      if (privacyTitle) privacyTitle.textContent = t.privacyTitle;
+      const privacyList = privacy.querySelectorAll('li');
+      t.privacyList.forEach((item, index) => {
+        if (privacyList[index]) privacyList[index].textContent = item;
+      });
+    }
 
-  const flow = document.querySelector('#uncertainties .challenge-item:nth-child(2)');
-  flow.querySelector('h4').textContent = t.flowTitle;
-  flow.querySelector('p').textContent = t.flowDesc;
-  flow.querySelector('p strong').textContent = t.flowApproach;
-  flow.querySelector('p:last-child').textContent = t.flowSolution;
+    // Challenges section
+    const challengesTitle = document.querySelector('#uncertainties h3');
+    if (challengesTitle) challengesTitle.textContent = t.challengesTitle;
+    const engagement = document.querySelector('#uncertainties .challenge-item:nth-child(1)');
+    if (engagement) {
+      const engagementTitle = engagement.querySelector('h4');
+      if (engagementTitle) engagementTitle.textContent = t.engagementTitle;
+      const engagementDesc = engagement.querySelector('p');
+      if (engagementDesc) engagementDesc.textContent = t.engagementDesc;
+      const engagementApproach = engagement.querySelector('p strong');
+      if (engagementApproach) engagementApproach.textContent = t.engagementApproach;
+      const engagementSolution = engagement.querySelector('p:last-child');
+      if (engagementSolution) engagementSolution.textContent = t.engagementSolution;
+    }
 
-  const time = document.querySelector('#uncertainties .challenge-item:nth-child(3)');
-  time.querySelector('h4').textContent = t.timeTitle;
-  time.querySelector('p').textContent = t.timeDesc;
-  time.querySelector('p strong').textContent = t.timeApproach;
-  time.querySelector('p:last-child').textContent = t.timeSolution;
+    const flow = document.querySelector('#uncertainties .challenge-item:nth-child(2)');
+    if (flow) {
+      const flowTitle = flow.querySelector('h4');
+      if (flowTitle) flowTitle.textContent = t.flowTitle;
+      const flowDesc = flow.querySelector('p');
+      if (flowDesc) flowDesc.textContent = t.flowDesc;
+      const flowApproach = flow.querySelector('p strong');
+      if (flowApproach) flowApproach.textContent = t.flowApproach;
+      const flowSolution = flow.querySelector('p:last-child');
+      if (flowSolution) flowSolution.textContent = t.flowSolution;
+    }
 
-  // Demo section
-  document.querySelector('#demo h3').textContent = t.demoTitle;
-  document.querySelector('#demo p').textContent = t.demoDesc;
+    const time = document.querySelector('#uncertainties .challenge-item:nth-child(3)');
+    if (time) {
+      const timeTitle = time.querySelector('h4');
+      if (timeTitle) timeTitle.textContent = t.timeTitle;
+      const timeDesc = time.querySelector('p');
+      if (timeDesc) timeDesc.textContent = t.timeDesc;
+      const timeApproach = time.querySelector('p strong');
+      if (timeApproach) timeApproach.textContent = t.timeApproach;
+      const timeSolution = time.querySelector('p:last-child');
+      if (timeSolution) timeSolution.textContent = t.timeSolution;
+    }
 
-  // Form
-  document.getElementById('name').placeholder = t.formName;
-  document.getElementById('surname').placeholder = t.formSurname;
-  document.getElementById('email').placeholder = t.formEmail;
-  document.getElementById('class-level').placeholder = t.formClass;
-  const roleSelect = document.getElementById('role');
-  roleSelect.querySelector('option[value=""]').textContent = t.formRole;
-  roleSelect.querySelector('option[value="teacher"]').textContent = t.formTeacher;
-  roleSelect.querySelector('option[value="parent"]').textContent = t.formParent;
-  roleSelect.querySelector('option[value="student"]').textContent = t.formStudent;
-  roleSelect.querySelector('option[value="other"]').textContent = t.formOther;
-  document.querySelector('#demo-form button').textContent = t.formButton;
+    // Demo section
+    const demoTitle = document.querySelector('#demo h3');
+    if (demoTitle) demoTitle.textContent = t.demoTitle;
+    const demoDesc = document.querySelector('#demo p');
+    if (demoDesc) demoDesc.textContent = t.demoDesc;
 
-  // Footer
-  document.querySelector('footer p').innerHTML = t.footer;
+    // Form
+    const nameInput = document.getElementById('name');
+    if (nameInput) nameInput.placeholder = t.formName;
+    const surnameInput = document.getElementById('surname');
+    if (surnameInput) surnameInput.placeholder = t.formSurname;
+    const emailInput = document.getElementById('email');
+    if (emailInput) emailInput.placeholder = t.formEmail;
+    const classInput = document.getElementById('class-level');
+    if (classInput) classInput.placeholder = t.formClass;
+    const roleSelect = document.getElementById('role');
+    if (roleSelect) {
+      const roleOption = roleSelect.querySelector('option[value=""]');
+      if (roleOption) roleOption.textContent = t.formRole;
+      const teacherOption = roleSelect.querySelector('option[value="teacher"]');
+      if (teacherOption) teacherOption.textContent = t.formTeacher;
+      const parentOption = roleSelect.querySelector('option[value="parent"]');
+      if (parentOption) parentOption.textContent = t.formParent;
+      const studentOption = roleSelect.querySelector('option[value="student"]');
+      if (studentOption) studentOption.textContent = t.formStudent;
+      const otherOption = roleSelect.querySelector('option[value="other"]');
+      if (otherOption) otherOption.textContent = t.formOther;
+    }
+    const formButton = document.querySelector('#demo-form button');
+    if (formButton) formButton.textContent = t.formButton;
 
-  // Update button text
-  document.getElementById('lang-switch').textContent = lang === 'fr' ? 'EN' : 'FR';
+    // Footer
+    const footer = document.querySelector('footer p');
+    if (footer) footer.innerHTML = t.footer;
+
+    // Update button text
+    const langButton = document.getElementById('lang-switch');
+    if (langButton) langButton.textContent = lang === 'fr' ? 'EN' : 'FR';
+
+  } catch (error) {
+    console.error('Error updating content:', error);
+  }
 }
 
 // Language switch handler
-document.getElementById('lang-switch').addEventListener('click', () => {
-  currentLang = currentLang === 'fr' ? 'en' : 'fr';
-  localStorage.setItem('language', currentLang);
-  updateContent(currentLang);
-});
+function setupLanguageSwitch() {
+  const langButton = document.getElementById('lang-switch');
+  if (langButton) {
+    langButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentLang = currentLang === 'fr' ? 'en' : 'fr';
+      localStorage.setItem('language', currentLang);
+      updateContent(currentLang);
+    });
+  } else {
+    console.error('Language switch button not found');
+  }
+}
 
 // Function to send data to Apps Script
 async function sendToSheets(formData) {
@@ -356,4 +448,14 @@ document.getElementById('demo-form').addEventListener('submit', async (e) => {
 // Initialize content on page load
 document.addEventListener('DOMContentLoaded', () => {
   updateContent(currentLang);
+  setupLanguageSwitch();
 });
+
+// Fallback for when DOMContentLoaded has already fired
+if (document.readyState === 'loading') {
+  // DOM not yet loaded
+} else {
+  // DOM already loaded
+  updateContent(currentLang);
+  setupLanguageSwitch();
+}
