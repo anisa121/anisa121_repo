@@ -271,18 +271,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Function to send form data to Google Sheets
+// Функция для отправки данных на Apps Script
 async function sendToSheets(formData) {
-  await fetch("https://script.google.com/macros/s/AKfycbwNWJPFksBIRwuiMorezK8pPG7KaLNZLxAR6YqMfRj-cpSesLXBFT1CW26WH5wjIgVr/exec", {
+  const response = await fetch("https://script.google.com/macros/s/AKfycbywDI2TwG_VMje1R109LkhyMMhOArxcsDr4th6NX97cbQiikYm3amThhm4vv_QKkzen/exec", {
     method: "POST",
     body: JSON.stringify(formData),
     headers: {
       "Content-Type": "application/json"
     }
   });
+  return response.json(); // вернёт JSON с {status: 'success'} или {status: 'error'}
 }
 
-// Form submission
+// Обработчик формы
 document.getElementById('demo-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -295,13 +296,13 @@ document.getElementById('demo-form').addEventListener('submit', async (e) => {
   };
 
   try {
-    const response = await sendToSheets(data);
-    const result = await response.json(); // <- получаем JSON с логами
+    const result = await sendToSheets(data);
+
     if (result.status === 'success') {
       alert("Отправлено!");
       document.getElementById('demo-form').reset();
     } else {
-      alert("Ошибка при отправке: " + JSON.stringify(result.logs || result.message));
+      alert("Ошибка при отправке: " + (result.message || "Неизвестная ошибка"));
       console.error(result);
     }
   } catch (error) {
