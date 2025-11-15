@@ -1,11 +1,11 @@
-// Функция для отправки данных на Apps Script
+// Function to send data to Apps Script
 async function sendToSheets(formData) {
   const params = new URLSearchParams(formData).toString();
   const response = await fetch(`https://script.google.com/macros/s/AKfycbwuzVQmKyt1zz_gJNscnmdVn5D3R6Wt72qOuCXDpcydrWipvHQF0YrOik9kFRBLsbPA/exec?${params}`);
-  return response.json(); // вернёт JSON с {status: 'success'} или {status: 'error'}
+  return response.json(); // returns JSON with {status: 'success'} or {status: 'error'}
 }
 
-// Обработчик формы
+// Form handler
 document.getElementById('demo-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -24,11 +24,11 @@ document.getElementById('demo-form').addEventListener('submit', async (e) => {
       alert("Successfully sent!");
       document.getElementById('demo-form').reset();
     } else {
-      alert("Ошибка при отправке: " + (result.message || "Неизвестная ошибка"));
+      alert("Error sending: " + (result.message || "Unknown error"));
       console.error(result);
     }
   } catch (error) {
-    alert("Ошибка при fetch: " + error);
+    alert("Fetch error: " + error);
     console.error(error);
   }
 });
