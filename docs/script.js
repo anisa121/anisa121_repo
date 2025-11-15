@@ -21,7 +21,7 @@ document.getElementById('demo-form').addEventListener('submit', async (e) => {
     const result = await sendToSheets(data);
 
     if (result.status === 'success') {
-      alert("Отправлено!");
+      alert("Successfully sent!");
       document.getElementById('demo-form').reset();
     } else {
       alert("Ошибка при отправке: " + (result.message || "Неизвестная ошибка"));
