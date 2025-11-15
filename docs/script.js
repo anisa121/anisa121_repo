@@ -273,7 +273,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Function to send form data to Google Sheets
 async function sendToSheets(formData) {
-  await fetch("https://script.google.com/macros/s/AKfycbxhsfaYsoFn5a_PqrKffHVHMmdEyMLP09r9fTo6wepx74jTTuKGHNyqN1dM_YCvAccm/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbwNWJPFksBIRwuiMorezK8pPG7KaLNZLxAR6YqMfRj-cpSesLXBFT1CW26WH5wjIgVr/exec", {
     method: "POST",
     body: JSON.stringify(formData),
     headers: {
