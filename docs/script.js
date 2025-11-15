@@ -295,13 +295,18 @@ document.getElementById('demo-form').addEventListener('submit', async (e) => {
   };
 
   try {
-    await sendToSheets(data);
-    alert("Отправлено!");
-    // Reset form
-    document.getElementById('demo-form').reset();
+    const response = await sendToSheets(data);
+    const result = await response.json(); // <- получаем JSON с логами
+    if (result.status === 'success') {
+      alert("Отправлено!");
+      document.getElementById('demo-form').reset();
+    } else {
+      alert("Ошибка при отправке: " + JSON.stringify(result.logs || result.message));
+      console.error(result);
+    }
   } catch (error) {
-    alert("Ошибка при отправке данных. Попробуйте еще раз.");
-    console.error("Error sending data:", error);
+    alert("Ошибка при fetch: " + error);
+    console.error(error);
   }
 });
 
